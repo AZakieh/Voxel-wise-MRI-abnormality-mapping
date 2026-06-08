@@ -1,0 +1,2 @@
+Nibabel
+matplotlib
