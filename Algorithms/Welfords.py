@@ -5,6 +5,7 @@ import glob
 #files = glob.glob("../Brain scans/Control scans/**/*FA*.nii.gz", recursive=True)
 files = glob.glob("../Brain scans/test scans/**/*FA*.nii.gz", recursive=True)
 atlas_mask = nib.load("/home/adamzakieh/PycharmProjects/MRI-Pipeline/Brain scans/myaparc_60wm5max_Dil_with_Subcortical_Regions_2mm.nii.gz").get_fdata()
+atlas_mask = (atlas_mask > 0).astype(float)
 
 MNI152_2mm_Shape = (91, 109, 91)
 MNI152_2mm_Affine = np.array([
@@ -53,7 +54,7 @@ mean_map = Welford.get_mean()
 sd_map = np.sqrt(Welford.get_sample_variance())
 
 mean_img = nib.Nifti1Image(mean_map, MNI152_2mm_Affine)
-nib.save(mean_img, "mean_map.nii.gz")
+nib.save(mean_img, "../Brain scans/mean_map.nii.gz")
 
 sd_img = nib.Nifti1Image(sd_map, MNI152_2mm_Affine)
-nib.save(sd_img, "sd_map.nii.gz")
+nib.save(sd_img, "../Brain scans/sd_map.nii.gz")
