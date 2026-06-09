@@ -1,0 +1,28 @@
+{
+  "AcquisitionMatrixPE": 256,
+  "ColString": null,
+  "Dimensions": [
+    256,
+    170,
+    256
+  ],
+  "FlipAngle": 20,
+  "InversionTime": 0.45,
+  "ManufacturersModelName": "SIGNA HDx",
+  "ParallelReductionFactorInPlane": null,
+  "PercentPhaseFOV": 75,
+  "PixelBandwidth": 244.141,
+  "ReconMatrixPE": 256,
+  "SequenceVariant": "SS\\SP\\SK",
+  "SliceThickness": 1.1,
+  "SoftwareVersions": "14\\LX\\MR Software release:14.0_M5_0737.f",
+  "VoxelSizes": [
+    0.9375,
+    1.0998113,
+    0.9375
+  ],
+  "Modality": "MR",
+  "MagneticFieldStrength": 3,
+  "Hospital": "UCLH",
+  "exam_type": "imaging"
+}
