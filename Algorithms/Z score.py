@@ -8,7 +8,7 @@ import glob
 import os
 
 atlas_mask = nib.load("/home/adamzakieh/PycharmProjects/MRI-Pipeline/Brain scans/myaparc_60wm5max_Dil_with_Subcortical_Regions_2mm.nii.gz").get_fdata()
-atlas_mask = (atlas_mask > 0).astype(float)
+atlas_mask = (atlas_mask > 0).astype(bool)
 
 MNI152_2mm_Shape = (91, 109, 91)
 MNI152_2mm_Affine = np.array([
@@ -26,8 +26,8 @@ def z_score(patient):
     patient_mni_verification(patient)
 
     patient_img = nib.load(patient)
-    mean_img = nib.load("Brain scans/mean_map.nii.gz")
-    sd_img = nib.load("Brain scans/sd_map.nii.gz")
+    mean_img = nib.load("../Brain scans/mean_map.nii.gz")
+    sd_img = nib.load("../Brain scans/sd_map.nii.gz")
 
     patient_data = patient_img.get_fdata()
     patient_data = patient_data * atlas_mask
@@ -41,12 +41,13 @@ def z_score(patient):
 
 base_file = os.path.basename(filename)
 base_root = os.path.splitext(base_file)
-file_root = os.path.splitext(base_root)
+file_root = os.path.splitext(str(base_root))
+file_name = "../Brain scans/patient z scores/" + str(file_root) + "_z_score.nii.gz"
 
 patient_z_score_map = z_score(filename)
 
 patient_z_score_img = nib.Nifti1Image(patient_z_score_map, MNI152_2mm_Affine)
-nib.save(patient_z_score_img, "../Brain scans/" + file_root + "_z_score.nii.gz")
+nib.save(patient_z_score_img, file_name)
 
 
 
