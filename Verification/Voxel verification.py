@@ -3,7 +3,7 @@ import glob
 
 files = glob.glob("../Brain scans/Control scans/**/*FA*.nii.gz", recursive=True)
 
-def Voxel_Verification(files):
+def control_voxel_verification(files):
     for scan in files:
         img = nib.load(scan)
         data = img.get_fdata()
@@ -12,6 +12,7 @@ def Voxel_Verification(files):
         if pct_outside > 1:
             print(pct_outside, scan)
 
-Voxel_Verification(files)
+
+control_voxel_verification(files)
 
 

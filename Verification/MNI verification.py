@@ -12,7 +12,7 @@ MNI152_2mm_Affine = np.array([
     [ 0,  0,  0,   1]
 ], dtype=float)
 
-def mni_verification(brain_scans):
+def control_mni_verification(brain_scans):
     for scan in brain_scans:
         img = nib.load(scan)
         if img.shape != MNI152_2mm_Shape:
@@ -21,4 +21,19 @@ def mni_verification(brain_scans):
         if not np.allclose(img.affine, MNI152_2mm_Affine, atol=1e-3):
             print(scan)
 
-mni_verification(files)
+def patient_mni_verification(scan):
+        img = nib.load(scan)
+        if img.shape != MNI152_2mm_Shape:
+            return False
+
+        elif not np.allclose(img.affine, MNI152_2mm_Affine, atol=1e-3):
+            return False
+
+        else:
+            return True
+
+
+
+
+
+control_mni_verification(files)
