@@ -24,16 +24,9 @@ def control_mni_verification(brain_scans):
 def patient_mni_verification(scan):
         img = nib.load(scan)
         if img.shape != MNI152_2mm_Shape:
-            return False
+            raise ValueError
 
-        elif not np.allclose(img.affine, MNI152_2mm_Affine, atol=1e-3):
-            return False
-
-        else:
-            return True
-
-
-
-
+        if not np.allclose(img.affine, MNI152_2mm_Affine, atol=1e-3):
+            raise ValueError
 
 control_mni_verification(files)
