@@ -39,6 +39,15 @@ def z_score(patient):
 
     return z_score_map
 
+base_file = os.path.basename(filename)
+base_root = os.path.splitext(base_file)
+file_root = os.path.splitext(base_root)
+
+patient_z_score_map = z_score(filename)
+
+patient_z_score_img = nib.Nifti1Image(patient_z_score_map, MNI152_2mm_Affine)
+nib.save(patient_z_score_img, "../Brain scans/" + file_root + "_z_score.nii.gz")
+
 
 
 
