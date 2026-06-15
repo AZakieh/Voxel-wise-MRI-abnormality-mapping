@@ -43,11 +43,17 @@ base_file = os.path.basename(filename)
 base_root = os.path.splitext(base_file)
 file_root = os.path.splitext(str(base_root))
 file_name = "../Brain scans/patient z scores/" + str(file_root) + "_z_score.nii.gz"
+file_name2 ="../Brain scans/abnormality map/" + str(file_root) + "_abnormality.nii.gz"
 
 patient_z_score_map = z_score(filename)
+abnormality_map = np.where(np.abs(patient_z_score_map) > 2.5, patient_z_score_map, 0)
 
 patient_z_score_img = nib.Nifti1Image(patient_z_score_map, MNI152_2mm_Affine)
+
+abnormality_img = nib.Nifti1Image(abnormality_map, MNI152_2mm_Affine)
+
 nib.save(patient_z_score_img, file_name)
+nib.save(abnormality_img, file_name2)
 
 
 
