@@ -2,8 +2,7 @@ import nibabel as nib
 import numpy as np
 import glob
 
-#files = glob.glob("../Brain scans/Control scans/**/*FA*.nii.gz", recursive=True)
-files = glob.glob("../Brain scans/test scans/**/*FA*.nii.gz", recursive=True)
+files = glob.glob("../Brain scans/Control scans/**/*FA*.nii.gz", recursive=True)
 atlas_mask = nib.load("/home/adamzakieh/PycharmProjects/MRI-Pipeline/Brain scans/myaparc_60wm5max_Dil_with_Subcortical_Regions_2mm.nii.gz").get_fdata()
 atlas_mask = (atlas_mask > 0).astype(float)
 
