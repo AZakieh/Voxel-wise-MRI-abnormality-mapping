@@ -22,6 +22,14 @@ MNI152_2mm_Affine = np.array([
 Tk().withdraw()
 filename = askopenfilename()
 
+def strip_nifti_extension(filename: str) -> str:
+    base = os.path.basename(filename)
+    for ext in (".nii.gz", ".nii"):
+        if base.endswith(ext):
+            return base[: -len(ext)]
+    return os.path.splitext(base)[0]
+
+
 def z_score(patient):
     patient_mni_verification(patient)
 
@@ -39,11 +47,10 @@ def z_score(patient):
 
     return z_score_map
 
-base_file = os.path.basename(filename)
-base_root = os.path.splitext(base_file)
-file_root = os.path.splitext(str(base_root))
-file_name = "../Brain scans/patient z scores/" + str(file_root) + "_z_score.nii.gz"
-file_name2 ="../Brain scans/abnormality map/" + str(file_root) + "_abnormality.nii.gz"
+
+patient_id = strip_nifti_extension(filename)
+file_name = os.path.join("..", "Brain scans", "patient z scores", f"{patient_id}_z_score.nii.gz")
+file_name2 = os.path.join("..", "Brain scans", "abnormality map", f"{patient_id}_abnormality.nii.gz")
 
 patient_z_score_map = z_score(filename)
 abnormality_map = np.where(np.abs(patient_z_score_map) > 2.5, patient_z_score_map, 0)
