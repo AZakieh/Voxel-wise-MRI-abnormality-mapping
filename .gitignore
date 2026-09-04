@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# MRI scan data - large binary imaging files, not source-controlled.
+# BIDS sidecar .json metadata is intentionally left tracked.
+*.nii
+*.nii.gz
+
+# Python
+__pycache__/
+*.pyc
